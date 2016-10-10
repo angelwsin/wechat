@@ -1,0 +1,8 @@
+在使用eclipse进行整合springmvc时经常会碰到这样的异常: java.lang.ClassNotFoundException:org.springframework.web.context.ContextLoaderListener
+解决方法：
+
+1. 右键单击工程项目 ->点击 properties
+2. 选择 Deployment Assembly
+3. 点击 Add -> Java Build Path Entries -> Next
+4. 选择 Maven Dependencies -> Finish -> Apply -> OK
+5. Clean project and server. 重启server
