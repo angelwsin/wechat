@@ -29,8 +29,7 @@ public class WXMessageFactory {
 		try {
 			
 			buffer = new StringBuffer(XMLHEADER);
-			//微信使用的编码  gbk
-			String wechatMsg = IOUtils.toString(is, "gbk");
+			String wechatMsg = IOUtils.toString(is);
 			LOGGER.info(" wechat msg :"+ wechatMsg);
 			buffer.append(wechatMsg);
 			Document doc = reader.read(new ByteArrayInputStream(buffer.toString().getBytes()));

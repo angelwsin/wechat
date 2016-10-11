@@ -6,6 +6,7 @@ public class WXVoiceReqMessage extends WXBaseMessage{
 	
 	private  String MediaId;
 	private  String Format;
+	private  String Recognition;
 	public String getMediaId() {
 		return MediaId;
 	}
@@ -18,6 +19,12 @@ public class WXVoiceReqMessage extends WXBaseMessage{
 	public void setFormat(String format) {
 		Format = format;
 	}
+    public String getRecognition() {
+        return Recognition;
+    }
+    public void setRecognition(String recognition) {
+        Recognition = recognition;
+    }
 	
 	
 }
