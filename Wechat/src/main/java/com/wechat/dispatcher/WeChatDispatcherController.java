@@ -2,16 +2,19 @@ package com.wechat.dispatcher;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.wechat.comm.MsgContext;
+import com.wechat.manager.WeChatMessageManager;
 import com.wechat.util.StringUtils;
+import com.wechat.util.WXMessageFactory;
 
 
 @Controller
@@ -19,8 +22,8 @@ public class WeChatDispatcherController extends BaseController{
 	
 	private static final Logger LOGGER = LogManager.getLogger(WeChatDispatcherController.class);
 	
-//	@Autowired
-//	private WXMessageService wxMessageService;
+	@Resource(name="weChatMessageManager")
+	private WeChatMessageManager weChatMessageManager;
 	
 	         @RequestMapping(value="/weChatDispatcher")
 	         public String  wxSignature(HttpServletRequest request,HttpServletResponse response){
@@ -54,9 +57,11 @@ public class WeChatDispatcherController extends BaseController{
 	        */
 	       private void doPost(HttpServletRequest request,HttpServletResponse response){
 	           try {
-               String msg =  IOUtils.toString(request.getInputStream());
-               System.out.println(msg);
+	             MsgContext msgContext = WXMessageFactory.getMessageContext(request.getInputStream());
+	             weChatMessageManager.execute(msgContext);
             } catch (IOException e) {
+                LOGGER.error("", e);
+            } catch (Exception e) {
                 LOGGER.error("", e);
             }
 	          // handler.handleResponse(response);

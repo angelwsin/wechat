@@ -7,33 +7,37 @@ package com.wechat.comm;
  */
 public enum MessageTypeEnum {
     
-    TEXT("text","","文本消息"),
-    IMAGE("image","","图片消息"),
-    VOICE("voice","","音频消息"),
-    VIDEO("video","","视频消息"),
-    SHORTVIDEO("shortvideo","","短视频消息"),
-    LINK("link","","链接消息"),
-    LOCATION("location","","地址消息"),
+    TEXT("text","文本消息"),
+    IMAGE("image","图片消息"),
+    VOICE("voice","音频消息"),
+    VIDEO("video","视频消息"),
+    SHORTVIDEO("shortvideo","短视频消息"),
+    LINK("link","链接消息"),
+    LOCATION("location","地址消息"),
     EVENT_SUBSCRIBE("event","subscribe","订阅消息"),
     EVENT_UNSUBSCRIBE("event","unsubscribe","取消订阅消息"),
     EVENT_SCAN("event","SCAN","扫描消息"),
     EVENT_LOCATION("event","LOCATION","定位地理位置消息"),
-    EVENT_CLICK("evnet","CLICK","点击消息"),
-    EVNET_VIEW("evnet","VIEW","查看消息"),
-    EVENT_SCANCODE_PUSH("evnet","scancode_push","扫描码消息"),
-    EVENT_PIC_SYSPHOTO("evnet","pic_sysphoto","拍照消息");
+    EVENT_CLICK("event","CLICK","点击消息"),
+    EVNET_VIEW("event","VIEW","查看消息"),
+    EVENT_SCANCODE_PUSH("event","scancode_push","扫描码消息"),
+    EVENT_PIC_SYSPHOTO("event","pic_sysphoto","拍照消息");
     
-    private  MessageTypeEnum(String eventCode,String code,String desc){
-        this.eventCode = eventCode;
+    private  MessageTypeEnum(String msgType,String code,String desc){
+        this.msgType = msgType;
         this.code = code;
         this.desc = desc;
     }
+    private  MessageTypeEnum(String msgType,String desc){
+        this.msgType = msgType;
+        this.desc = desc;
+    }
     
-    private String eventCode;
+    private String msgType;
     private String code;
     private String desc;
-    public String getEventCode() {
-        return eventCode;
+    public String getMsgType() {
+        return msgType;
     }
     public String getCode() {
         return code;
@@ -41,6 +45,22 @@ public enum MessageTypeEnum {
     public String getDesc() {
         return desc;
     }
+    
+    
+    public static MessageTypeEnum getMessageByMsgTypeAndCode(String msgType,String code){
+               for(MessageTypeEnum msg : MessageTypeEnum.values()){
+                     if(code==null){
+                         if(msg.getMsgType().equals(msgType)){
+                             return msg;
+                         } 
+                     }else{
+                        if(msg.getMsgType().equals(msgType)&&msg.getCode().equals(code)){
+                            return msg;
+                        }
+                     }
+               }
+               return null;
+    } 
    
     
     /*text = com.wechat.message.WXTextReqMessage

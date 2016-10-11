@@ -8,24 +8,25 @@ public class WXLocationReqMessage extends WXBaseMessage{
 	Label	地理位置信息*/
 	
 	
-	private long Location_X;
-	private long Location_Y;
+	private String Location_X;
+	private String  Location_Y;
 	private int Scale;
 	private String Label;
 	
-	public long getLocation_X() {
-		return Location_X;
-	}
-	public void setLocation_X(long location_X) {
-		Location_X = location_X;
-	}
-	public long getLocation_Y() {
-		return Location_Y;
-	}
-	public void setLocation_Y(long location_Y) {
-		Location_Y = location_Y;
-	}
-	public int getScale() {
+	
+	public String getLocation_X() {
+        return Location_X;
+    }
+    public void setLocation_X(String location_X) {
+        Location_X = location_X;
+    }
+    public String getLocation_Y() {
+        return Location_Y;
+    }
+    public void setLocation_Y(String location_Y) {
+        Location_Y = location_Y;
+    }
+    public int getScale() {
 		return Scale;
 	}
 	public void setScale(int scale) {
