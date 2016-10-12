@@ -2,6 +2,7 @@ package com.wechat.messager.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.stereotype.Service;
 
 import com.wechat.comm.MsgContext;
@@ -38,6 +39,7 @@ public class WeChatEventMessagerServiceImpl implements WeChatMessagerService,WeC
     @WeChatMsg(clazz=WXSubscribeEventMessage.class,code="subscribe")
     public void subscribe(MsgContext msgContext) {
         WXSubscribeEventMessage msg = (WXSubscribeEventMessage) msgContext.getMsg();
+          
     }
 
 

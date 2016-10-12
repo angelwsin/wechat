@@ -90,7 +90,7 @@ public class WeChatTemplate {
             public T doInConnection(CloseableHttpClient httpClient) throws ClientProtocolException,
                                                                    IOException {
                 HttpGet httpGet = new HttpGet();
-                httpGet.setHeader("Content-Type", "text/html;charset=utf-8");
+               // httpGet.setHeader("Content-Type", "text/html;charset=utf-8");
                 StringBuffer buffer = new StringBuffer(url);
                 try {
                     httpGet.setURI(new URI(buffer.toString()));

@@ -10,12 +10,14 @@ import com.wechat.message.WXTextReqMessage;
 
 @Service("wechatTextService")
 public class WeChatTextMessagerServiceImpl implements WeChatMessagerService{
+    
 
     private static final Logger LOGGER = LogManager.getLogger(WeChatTextMessagerServiceImpl.class);
     @WeChatMsg(clazz=WXTextReqMessage.class)
     public void execute(MsgContext msgContext) {
         WXTextReqMessage msg = (WXTextReqMessage) msgContext.getMsg();
         LOGGER.info(" msg content "+msg.getContent());
+       
     }
 
      

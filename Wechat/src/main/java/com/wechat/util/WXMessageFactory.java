@@ -17,6 +17,8 @@ import org.dom4j.io.SAXReader;
 import com.thoughtworks.xstream.XStream;
 import com.wechat.comm.MessageTypeEnum;
 import com.wechat.comm.MsgContext;
+import com.wechat.message.WXNewItmesMessage;
+import com.wechat.message.WXNewsRespMessage;
 
 public class WXMessageFactory {
 	         public static final String XMLHEADER="<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -74,10 +76,10 @@ public class WXMessageFactory {
 	public static <T>String getMessageToXmlDefault(T message){
 		     return getMessageToXml(message,new String[]{"xml"},new Class<?>[]{message.getClass()});
 	}
-	/*
+	
 	public static String getgetMessageToXmlWXNews(WXNewsRespMessage message){
 		return getMessageToXml(message,new String[]{"xml","item"} ,new Class<?>[]{WXNewsRespMessage.class,WXNewItmesMessage.class});
-	}*/
+	}
 	
 	public  static void listFields(Class<?> clazz,XStream s){
 		  Field[] fields = clazz.getDeclaredFields();

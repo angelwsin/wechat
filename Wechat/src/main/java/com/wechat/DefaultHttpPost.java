@@ -8,6 +8,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 
 public class DefaultHttpPost extends HttpPost {
@@ -43,6 +44,10 @@ public class DefaultHttpPost extends HttpPost {
     public void build() {
         HttpEntity entity= EntityBuilder.create().setParameters(parameters).build();
         super.setEntity(entity);
+    }
+    
+    public void buildStringContent(String paramter) {
+        super.setEntity(new StringEntity(paramter, "utf-8"));
     }
     
 }
