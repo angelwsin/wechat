@@ -12,6 +12,10 @@ public class MsgContext {
         private WXMessage                msg;
         
         private Document          document;
+        
+        private String            msgType;
+        
+        private String            event;
 
        
 
@@ -37,6 +41,22 @@ public class MsgContext {
 
         public void setDocument(Document document) {
             this.document = document;
+        }
+
+        public String getMsgType() {
+            return msgType;
+        }
+
+        public void setMsgType(String msgType) {
+            this.msgType = msgType;
+        }
+
+        public String getEvent() {
+            return event;
+        }
+
+        public void setEvent(String event) {
+            this.event = event;
         }
         
         

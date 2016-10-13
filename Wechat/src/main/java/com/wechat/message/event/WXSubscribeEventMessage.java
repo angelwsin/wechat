@@ -1,10 +1,8 @@
-package com.wechat.message;
+package com.wechat.message.event;
 
-public class WX2DCodeScanEventMessage extends WXBaseEventMessage{
+public class WXSubscribeEventMessage extends WXBaseEventMessage{
 	/*EventKey	事件KEY值，是一个32位无符号整数，即创建二维码时的二维码scene_id
 	Ticket	二维码的ticket，可用来换取二维码图片*/
-	
-
 	private String Ticket;
 	
 	public String getTicket() {
@@ -13,5 +11,5 @@ public class WX2DCodeScanEventMessage extends WXBaseEventMessage{
 	public void setTicket(String ticket) {
 		Ticket = ticket;
 	}
-	
+
 }

@@ -2,19 +2,19 @@ package com.wechat.messager.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.stereotype.Service;
 
 import com.wechat.comm.MsgContext;
 import com.wechat.comm.WeChatMsg;
-import com.wechat.message.WX2DCodeScanEventMessage;
-import com.wechat.message.WXClickEventMessage;
-import com.wechat.message.WXLocationEventMessage;
-import com.wechat.message.WXPicSysPhotoMessage;
-import com.wechat.message.WXScanCodePushMessage;
-import com.wechat.message.WXSubscribeEventMessage;
-import com.wechat.message.WXUnsubscribeEventMessage;
-import com.wechat.message.WXViewEventMessage;
+import com.wechat.message.event.WX2DCodeScanEventMessage;
+import com.wechat.message.event.WXClickEventMessage;
+import com.wechat.message.event.WXLocationEventMessage;
+import com.wechat.message.event.WXLocationSelectMessage;
+import com.wechat.message.event.WXPicSysPhotoMessage;
+import com.wechat.message.event.WXScanCodePushMessage;
+import com.wechat.message.event.WXSubscribeEventMessage;
+import com.wechat.message.event.WXUnsubscribeEventMessage;
+import com.wechat.message.event.WXViewEventMessage;
 
 @Service("wechatEventService")
 public class WeChatEventMessagerServiceImpl implements WeChatMessagerService,WeChatEventMessageService{
@@ -91,8 +91,25 @@ public class WeChatEventMessagerServiceImpl implements WeChatMessagerService,WeC
     public void picSysPhoto(MsgContext msgContext) {
         WXPicSysPhotoMessage  msg = (WXPicSysPhotoMessage) msgContext.getMsg();
     }
-    
 
+    @WeChatMsg(clazz=WXLocationSelectMessage.class,code="location_select")
+    public void locationSelect(MsgContext msgContext) {
+        
+    }
+
+    @WeChatMsg(clazz=WXPicSysPhotoMessage.class,code="pic_photo_or_album")
+    public void picPhotoOrAlbum(MsgContext msgContext) {
+    }
+
+    @WeChatMsg(clazz=WXPicSysPhotoMessage.class,code="pic_weixin")
+    public void picWeixin(MsgContext msgContext) {
+    }
+
+    @WeChatMsg(clazz=WXScanCodePushMessage.class,code="scancode_waitmsg")
+    public void scanCodeWaitMsg(MsgContext msgContext) {
+    }
+    
+ 
      
     
 }

@@ -34,12 +34,12 @@ public class WeChatMessageManagerImpl implements WeChatMessageManager,Applicatio
        // LOGGER.info(" msg Context :"+JSONUtil.encode(msgContext));
         MessageTypeEnum  msgType =  msgContext.getMsgTypeEnum();
         if(null==msgType){
-            throw new Exception("msgContext 不能为空！");
+            throw new Exception("msgContext 不能为空！  msgType="+msgContext.getMsgType()+",event="+msgContext.getEvent());
         }
         Object  wechatMsgService =  applicationContext.getBean(wrapBeanName(msgType.getMsgType()));
         Method[]  methods = wechatMsgService.getClass().getDeclaredMethods();
         Method   exeMethode = null;
-        Method   defaultMethod = null;
+        Method   defaultMethod = wechatMsgService.getClass().getMethod(Const.EXECUTE, MsgContext.class);
         for(Method method : methods){
             WeChatMsg wechatMsg =  method.getAnnotation(WeChatMsg.class);
             if(null==wechatMsg){
@@ -49,14 +49,14 @@ public class WeChatMessageManagerImpl implements WeChatMessageManager,Applicatio
                 exeMethode = method;
                 break;
             }
-            if(Const.EXECUTE.equals(method.getName())){
-                defaultMethod = method;
-            }
         }
         if(null==exeMethode && defaultMethod!=null){
             exeMethode = defaultMethod;
         }
         WeChatMsg wechatMsg =  exeMethode.getAnnotation(WeChatMsg.class);
+        if(null==wechatMsg){
+            throw new Exception("没有找到 匹配的 msg ！");
+        }
         XStream s = new XStream();
         Document docu = msgContext.getDocument();
         WXMessageFactory.listFields(wechatMsg.clazz(),s);
@@ -69,7 +69,9 @@ public class WeChatMessageManagerImpl implements WeChatMessageManager,Applicatio
             if(CollectionUtils.isNotEmpty(Arrays.asList(beanNames))){
                 for(String beanName : beanNames){
                 WechatMessagerServiceAdapter  msgService = (WechatMessagerServiceAdapter) applicationContext.getBean(beanName);
-                msgService.handleMsg(msgContext);  
+                if(msgContext.getMsgTypeEnum()==msgService.getMsgType()){
+                    msgService.handleMsg(msgContext);  
+                }
                 }
             }
             

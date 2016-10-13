@@ -9,7 +9,7 @@ public class JSONUtil {
 	
 	 public static final String encode(Object object){
 		
-		 return JSON.toJSONString(object, new SerializerFeature[] { SerializerFeature.DisableCircularReferenceDetect,SerializerFeature.QuoteFieldNames });
+		 return JSON.toJSONString(object, new SerializerFeature[] { SerializerFeature.DisableCircularReferenceDetect });
 	 }
 	 public static final String encodePrettyFormat(Object object){
 		 return JSON.toJSONString(object, new SerializerFeature[] {  SerializerFeature.PrettyFormat});

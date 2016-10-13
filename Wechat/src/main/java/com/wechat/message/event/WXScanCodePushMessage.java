@@ -1,4 +1,6 @@
-package com.wechat.message;
+package com.wechat.message.event;
+
+import com.wechat.message.WXScanCodeInfo;
 
 public class WXScanCodePushMessage extends WXBaseEventMessage{
 	/*ScanCodeInfo 	扫描信息

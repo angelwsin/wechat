@@ -1,12 +1,12 @@
 package com.wechat;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.EntityBuilder;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
@@ -42,8 +42,13 @@ public class DefaultHttpPost extends HttpPost {
         return this;
     }
     public void build() {
-        HttpEntity entity= EntityBuilder.create().setParameters(parameters).build();
-        super.setEntity(entity);
+        
+       // HttpEntity entity= EntityBuilder.create().setParameters(parameters).build();
+        try {
+            super.setEntity(new UrlEncodedFormEntity(parameters, "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+           // logger.error("", e);
+        }
     }
     
     public void buildStringContent(String paramter) {

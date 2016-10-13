@@ -1,4 +1,6 @@
-package com.wechat.message;
+package com.wechat.message.event;
+
+import com.wechat.message.WXSendPicsInfo;
 
 public class WXPicSysPhotoMessage extends WXBaseEventMessage{
 /*	SendPicsInfo 	发送的图片信息

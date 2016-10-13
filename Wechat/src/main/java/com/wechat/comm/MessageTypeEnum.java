@@ -21,7 +21,11 @@ public enum MessageTypeEnum {
     EVENT_CLICK("event","CLICK","点击消息"),
     EVNET_VIEW("event","VIEW","查看消息"),
     EVENT_SCANCODE_PUSH("event","scancode_push","扫描码消息"),
-    EVENT_PIC_SYSPHOTO("event","pic_sysphoto","拍照消息");
+    EVENT_PIC_SYSPHOTO("event","pic_sysphoto","拍照消息"),
+    EVENT_LOCATION_SELECT("event","location_select","发送位置"),
+    EVENT_PIC_PHOTO_OR_ALBUM("event","pic_photo_or_album","相机或本地"),
+    EVENT_PIC_WEIXIN("event","pic_weixin","微信相册"),
+    EVENT_SCANCODE_WAITMSG("event","scancode_waitmsg","微信相册");
     
     private  MessageTypeEnum(String msgType,String code,String desc){
         this.msgType = msgType;

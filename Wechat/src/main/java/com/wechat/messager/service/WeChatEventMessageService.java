@@ -12,4 +12,8 @@ public interface WeChatEventMessageService {
     public void view(MsgContext msgContext);
     public void scanCodePush(MsgContext msgContext);
     public void picSysPhoto(MsgContext msgContext);
+    public void locationSelect(MsgContext msgContext);
+    public void picPhotoOrAlbum(MsgContext msgContext);
+    public void picWeixin(MsgContext msgContext);
+    public void scanCodeWaitMsg(MsgContext msgContext);
 }

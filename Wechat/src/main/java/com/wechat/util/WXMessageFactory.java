@@ -40,6 +40,8 @@ public class WXMessageFactory {
 			String event =node==null?null:node.getText();
 			msgContext.setDocument(doc);
 			msgContext.setMsgTypeEnum(MessageTypeEnum.getMessageByMsgTypeAndCode(type, event));
+			msgContext.setMsgType(type);
+			msgContext.setEvent(event);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
