@@ -75,7 +75,9 @@ public class WeChatDispatcherController extends BaseController{
                         }*/
 	           try {
 	             MsgContext msgContext = WXMessageFactory.getMessageContext(request.getInputStream());
-	             weChatMessageManager.execute(msgContext);
+	             String resp = weChatMessageManager.execute(msgContext);
+	             LOGGER.info(" resp :"+resp);
+	             writeToResponse(response, resp);
             } catch (IOException e) {
                 LOGGER.error("", e);
             } catch (Exception e) {

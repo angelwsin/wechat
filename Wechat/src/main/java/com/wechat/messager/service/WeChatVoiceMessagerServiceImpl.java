@@ -13,9 +13,10 @@ public class WeChatVoiceMessagerServiceImpl implements WeChatMessagerService{
 
     private static final Logger LOGGER = LogManager.getLogger(WeChatVoiceMessagerServiceImpl.class);
     @WeChatMsg(clazz=WXVoiceReqMessage.class)
-    public void execute(MsgContext msgContext) {
+    public String execute(MsgContext msgContext) {
         WXVoiceReqMessage msg = (WXVoiceReqMessage) msgContext.getMsg();
        // LOGGER.info(" msg content "+msg.getPicUrl());
+        return null;
     }
 
      

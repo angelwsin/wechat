@@ -24,7 +24,8 @@ public class WeChatEventMessagerServiceImpl implements WeChatMessagerService,WeC
     
     
 
-    public void execute(MsgContext msgContext) {
+    public String execute(MsgContext msgContext) {
+        return null;
     }
 
    /* event.subscribe = com.weixin.message.bean.WXSubscribeEventMessage
@@ -37,76 +38,87 @@ public class WeChatEventMessagerServiceImpl implements WeChatMessagerService,WeC
             event.pic_sysphoto = com.weixin.message.bean.WXPicSysPhotoMessage
 */
     @WeChatMsg(clazz=WXSubscribeEventMessage.class,code="subscribe")
-    public void subscribe(MsgContext msgContext) {
+    public String subscribe(MsgContext msgContext) {
         WXSubscribeEventMessage msg = (WXSubscribeEventMessage) msgContext.getMsg();
+        return null;
           
     }
 
 
 
     @WeChatMsg(clazz=WXUnsubscribeEventMessage.class,code="unsubscribe")
-    public void unsubscribe(MsgContext msgContext) {
+    public String unsubscribe(MsgContext msgContext) {
         WXUnsubscribeEventMessage msg = (WXUnsubscribeEventMessage) msgContext.getMsg();
+        return null;
     }
 
 
 
     @WeChatMsg(clazz=WX2DCodeScanEventMessage.class,code="SCAN")
-    public void scan(MsgContext msgContext) {
+    public String scan(MsgContext msgContext) {
         WX2DCodeScanEventMessage msg = (WX2DCodeScanEventMessage) msgContext.getMsg();
+        return null;
     }
 
 
 
     @WeChatMsg(clazz=WXLocationEventMessage.class,code="LOCATION")
-    public void location(MsgContext msgContext) {
+    public String location(MsgContext msgContext) {
         WXLocationEventMessage msg = (WXLocationEventMessage) msgContext.getMsg();
+        return null;
     }
 
 
 
     @WeChatMsg(clazz=WXClickEventMessage.class,code="CLICK")
-    public void click(MsgContext msgContext) {
+    public String click(MsgContext msgContext) {
         WXClickEventMessage  msg = (WXClickEventMessage) msgContext.getMsg();
         LOGGER.info(" WXClickEventMessage "+msg.getEventKey());
+        return null;
     }
 
 
 
     @WeChatMsg(clazz=WXViewEventMessage.class,code="VIEW")
-    public void view(MsgContext msgContext) {
+    public String view(MsgContext msgContext) {
         WXViewEventMessage msg = (WXViewEventMessage) msgContext.getMsg();
+        return null;
     }
 
 
 
     @WeChatMsg(clazz=WXScanCodePushMessage.class,code="scancode_push")
-    public void scanCodePush(MsgContext msgContext) {
+    public String scanCodePush(MsgContext msgContext) {
         WXScanCodePushMessage  msg = (WXScanCodePushMessage) msgContext.getMsg();
+        return null;
     }
 
 
 
     @WeChatMsg(clazz=WXPicSysPhotoMessage.class,code="pic_sysphoto")
-    public void picSysPhoto(MsgContext msgContext) {
+    public String picSysPhoto(MsgContext msgContext) {
         WXPicSysPhotoMessage  msg = (WXPicSysPhotoMessage) msgContext.getMsg();
+        return null;
     }
 
     @WeChatMsg(clazz=WXLocationSelectMessage.class,code="location_select")
-    public void locationSelect(MsgContext msgContext) {
-        
+    public String locationSelect(MsgContext msgContext) {
+        return null;
     }
 
     @WeChatMsg(clazz=WXPicSysPhotoMessage.class,code="pic_photo_or_album")
-    public void picPhotoOrAlbum(MsgContext msgContext) {
+    public String picPhotoOrAlbum(MsgContext msgContext) {
+        return null;
     }
 
     @WeChatMsg(clazz=WXPicSysPhotoMessage.class,code="pic_weixin")
-    public void picWeixin(MsgContext msgContext) {
+    public String picWeixin(MsgContext msgContext) {
+        return null;
     }
 
     @WeChatMsg(clazz=WXScanCodePushMessage.class,code="scancode_waitmsg")
-    public void scanCodeWaitMsg(MsgContext msgContext) {
+    public String scanCodeWaitMsg(MsgContext msgContext) {
+        return null;
     }
     
  

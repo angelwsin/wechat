@@ -4,7 +4,7 @@ import com.wechat.comm.MsgContext;
 
 public interface WeChatMessagerService {
 
-     public void execute(MsgContext msgContext);
+     public String execute(MsgContext msgContext);
      
      
      

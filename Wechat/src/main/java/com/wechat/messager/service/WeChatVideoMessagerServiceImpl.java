@@ -13,9 +13,10 @@ public class WeChatVideoMessagerServiceImpl implements WeChatMessagerService{
 
     private static final Logger LOGGER = LogManager.getLogger(WeChatVideoMessagerServiceImpl.class);
     @WeChatMsg(clazz=WXVideoReqMessage.class)
-    public void execute(MsgContext msgContext) {
+    public String execute(MsgContext msgContext) {
         WXVideoReqMessage msg = (WXVideoReqMessage) msgContext.getMsg();
        // LOGGER.info(" msg content "+msg.getPicUrl());
+        return null;
     }
 
      

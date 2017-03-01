@@ -27,7 +27,7 @@ public class WeChatMenuManagerImpl implements WeChatMenuManager{
         WeChatTemplate we = new WeChatTemplate();
         DefaultHttpPost post = new DefaultHttpPost(createUrl+"?access_token="+TokenServiceManager.acessToken());
         post.addHeaderValue("Content-Type", "application/json;charset=utf-8")
-        .addHeaderValue("Accept", "application/json").buildStringContent(JSONUtil.encode(menu));;
+        .addHeaderValue("Accept", "application/json").buildStringContent(JSONUtil.encode(menu));
         try {
            String resp =  we.doForString(post);
            LOGGER.info(resp);

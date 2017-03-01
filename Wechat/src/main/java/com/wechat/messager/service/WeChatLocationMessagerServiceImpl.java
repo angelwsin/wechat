@@ -13,8 +13,9 @@ public class WeChatLocationMessagerServiceImpl implements WeChatMessagerService{
 
     private static final Logger LOGGER = LogManager.getLogger(WeChatLocationMessagerServiceImpl.class);
     @WeChatMsg(clazz=WXLocationReqMessage.class)
-    public void execute(MsgContext msgContext) {
+    public String execute(MsgContext msgContext) {
         WXLocationReqMessage msg = (WXLocationReqMessage) msgContext.getMsg();
+        return null;
     }
 
      

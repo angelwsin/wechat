@@ -10,12 +10,12 @@ import org.apache.logging.log4j.Logger;
 
 import com.wechat.HttpRequestBuilder;
 import com.wechat.WeChatTemplate;
-import com.wechat.comm.Const;
 import com.wechat.comm.MaterialTypeEnum;
 import com.wechat.err.Message.ErrorMessage;
 import com.wechat.manager.TokenServiceManager;
 import com.wechat.util.JSONUtil;
 
+// 素材管理
 public class WechatMaterialServiceImpl implements WechatMaterialService{
     
     private static final Logger LOGGER = LogManager.getLogger(WechatMaterialServiceImpl.class);

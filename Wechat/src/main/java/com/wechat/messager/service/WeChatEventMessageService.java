@@ -4,16 +4,16 @@ import com.wechat.comm.MsgContext;
 
 public interface WeChatEventMessageService {
 
-    public void subscribe(MsgContext msgContext);
-    public void unsubscribe(MsgContext msgContext);
-    public void scan(MsgContext msgContext);
-    public void location(MsgContext msgContext);
-    public void click(MsgContext msgContext);
-    public void view(MsgContext msgContext);
-    public void scanCodePush(MsgContext msgContext);
-    public void picSysPhoto(MsgContext msgContext);
-    public void locationSelect(MsgContext msgContext);
-    public void picPhotoOrAlbum(MsgContext msgContext);
-    public void picWeixin(MsgContext msgContext);
-    public void scanCodeWaitMsg(MsgContext msgContext);
+    public String subscribe(MsgContext msgContext);
+    public String unsubscribe(MsgContext msgContext);
+    public String scan(MsgContext msgContext);
+    public String location(MsgContext msgContext);
+    public String click(MsgContext msgContext);
+    public String view(MsgContext msgContext);
+    public String scanCodePush(MsgContext msgContext);
+    public String picSysPhoto(MsgContext msgContext);
+    public String locationSelect(MsgContext msgContext);
+    public String picPhotoOrAlbum(MsgContext msgContext);
+    public String picWeixin(MsgContext msgContext);
+    public String scanCodeWaitMsg(MsgContext msgContext);
 }

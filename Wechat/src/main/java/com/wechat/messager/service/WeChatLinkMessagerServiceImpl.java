@@ -13,9 +13,10 @@ public class WeChatLinkMessagerServiceImpl implements WeChatMessagerService{
 
     private static final Logger LOGGER = LogManager.getLogger(WeChatLinkMessagerServiceImpl.class);
     @WeChatMsg(clazz=WXLinkReqMessage.class)
-    public void execute(MsgContext msgContext) {
+    public String execute(MsgContext msgContext) {
         WXLinkReqMessage msg = (WXLinkReqMessage) msgContext.getMsg();
        // LOGGER.info(" msg content "+msg.getPicUrl());
+        return null;
     }
 
      

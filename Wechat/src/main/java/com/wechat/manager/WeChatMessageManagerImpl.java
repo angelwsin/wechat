@@ -1,15 +1,12 @@
 package com.wechat.manager;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
@@ -20,7 +17,6 @@ import com.wechat.comm.MessageTypeEnum;
 import com.wechat.comm.MsgContext;
 import com.wechat.comm.WeChatMsg;
 import com.wechat.message.WXMessage;
-import com.wechat.messager.service.WechatMessagerServiceAdapter;
 import com.wechat.util.StringUtils;
 import com.wechat.util.WXMessageFactory;
 
@@ -30,7 +26,7 @@ public class WeChatMessageManagerImpl implements WeChatMessageManager,Applicatio
     private static final Logger LOGGER = LogManager.getLogger(WeChatMessageManagerImpl.class);
       private ApplicationContext  applicationContext;
 
-    public void execute(MsgContext msgContext) throws Exception{
+    public String execute(MsgContext msgContext) throws Exception{
        // LOGGER.info(" msg Context :"+JSONUtil.encode(msgContext));
         MessageTypeEnum  msgType =  msgContext.getMsgTypeEnum();
         if(null==msgType){
@@ -64,16 +60,8 @@ public class WeChatMessageManagerImpl implements WeChatMessageManager,Applicatio
         e.setName(wechatMsg.clazz().getName());
         WXMessage msg = (WXMessage) s.fromXML(e.asXML());
         msgContext.setMsg(msg);
-        exeMethode.invoke(wechatMsgService, msgContext);
-       String[] beanNames  = BeanFactoryUtils.beanNamesForTypeIncludingAncestors(applicationContext, WechatMessagerServiceAdapter.class, false, true);
-            if(CollectionUtils.isNotEmpty(Arrays.asList(beanNames))){
-                for(String beanName : beanNames){
-                WechatMessagerServiceAdapter  msgService = (WechatMessagerServiceAdapter) applicationContext.getBean(beanName);
-                if(msgContext.getMsgTypeEnum()==msgService.getMsgType()){
-                    msgService.handleMsg(msgContext);  
-                }
-                }
-            }
+        return  String.valueOf(exeMethode.invoke(wechatMsgService, msgContext)) ;
+      
             
     }
 

@@ -6,7 +6,7 @@ public interface WeChatMessageManager {
     
     
     
-     public void  execute(MsgContext msgContext)throws Exception;
+     public String  execute(MsgContext msgContext)throws Exception;
     
 
 }

@@ -1,5 +1,7 @@
 package com.wechat.message;
 
+import com.wechat.comm.WechatRespMsgEnum;
+
 public class WXCustTextRespMessage extends WXCustBaseRespMessage{
                    private  WXCustTextMessage text;
 
@@ -9,6 +11,11 @@ public class WXCustTextRespMessage extends WXCustBaseRespMessage{
 
 				public void setText(WXCustTextMessage text) {
 					this.text = text;
+				}
+				
+				@Override
+				public String getMsgtype() {
+				return  WechatRespMsgEnum.text.name();
 				}
                    
 }
