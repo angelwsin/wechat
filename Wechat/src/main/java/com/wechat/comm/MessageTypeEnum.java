@@ -25,7 +25,8 @@ public enum MessageTypeEnum {
     EVENT_LOCATION_SELECT("event","location_select","发送位置"),
     EVENT_PIC_PHOTO_OR_ALBUM("event","pic_photo_or_album","相机或本地"),
     EVENT_PIC_WEIXIN("event","pic_weixin","微信相册"),
-    EVENT_SCANCODE_WAITMSG("event","scancode_waitmsg","微信相册");
+    EVENT_SCANCODE_WAITMSG("event","scancode_waitmsg","微信相册"),
+    EVENT_TEMPLATESENDJOBFINISH("event","TEMPLATESENDJOBFINISH","模板通知");
     
     private  MessageTypeEnum(String msgType,String code,String desc){
         this.msgType = msgType;

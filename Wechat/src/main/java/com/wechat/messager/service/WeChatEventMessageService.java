@@ -16,4 +16,5 @@ public interface WeChatEventMessageService {
     public String picPhotoOrAlbum(MsgContext msgContext);
     public String picWeixin(MsgContext msgContext);
     public String scanCodeWaitMsg(MsgContext msgContext);
+    public String templdateSendJobFinish(MsgContext msgContext);
 }

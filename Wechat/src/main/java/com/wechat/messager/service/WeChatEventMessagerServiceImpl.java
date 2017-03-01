@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.wechat.comm.MsgContext;
 import com.wechat.comm.WeChatMsg;
+import com.wechat.message.WXTemplateRequestMessage;
 import com.wechat.message.event.WX2DCodeScanEventMessage;
 import com.wechat.message.event.WXClickEventMessage;
 import com.wechat.message.event.WXLocationEventMessage;
@@ -120,6 +121,19 @@ public class WeChatEventMessagerServiceImpl implements WeChatMessagerService,WeC
     public String scanCodeWaitMsg(MsgContext msgContext) {
         return null;
     }
+    
+    @WeChatMsg(clazz=WXTemplateRequestMessage.class,code="TEMPLATESENDJOBFINISH")
+    public String templdateSendJobFinish(MsgContext msgContext) {
+        WXTemplateRequestMessage msg = (WXTemplateRequestMessage) msgContext.getMsg();
+        if("success".equals(msg.getStatus())){
+            LOGGER.info(" 推送成功！");  
+        }else{
+            LOGGER.info(" 推送失败！"+msg.getStatus());
+        }
+        return "";
+    }
+    
+    
     
  
      
