@@ -17,9 +17,9 @@ import com.wechat.util.JSONUtil;
 
 public class WeChatMenuManagerImpl implements WeChatMenuManager{
     private static final Logger LOGGER = LogManager.getLogger(WeChatMenuManagerImpl.class);
-          private String  createUrl="https://api.weixin.qq.com/cgi-bin/menu/create";
-          private String  getUrl ="https://api.weixin.qq.com/cgi-bin/menu/get";
-          private String  deleteUrl = "https://api.weixin.qq.com/cgi-bin/menu/delete";
+          private static final String  createUrl="https://api.weixin.qq.com/cgi-bin/menu/create";
+          private static final String  getUrl ="https://api.weixin.qq.com/cgi-bin/menu/get";
+          private static final String  deleteUrl = "https://api.weixin.qq.com/cgi-bin/menu/delete";
     
 
           

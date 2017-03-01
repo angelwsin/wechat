@@ -80,10 +80,12 @@ public class HttpRequestBuilder {
            HttpPost post = new HttpPost(url);
            FileBody bin = new FileBody(file);  
          MultipartEntityBuilder builder  = MultipartEntityBuilder.create();
-         Set<String> keySet = params.keySet();  
-          for(String key : keySet) {  
-             builder.addTextBody(key, params.get(key));
-          }  
+         if(params!=null){
+             Set<String> keySet = params.keySet();  
+             for(String key : keySet) {  
+                builder.addTextBody(key, params.get(key));
+             }    
+         }
           builder.addPart("media", bin);
          HttpEntity entity =  builder.build();
          post.setEntity(entity);

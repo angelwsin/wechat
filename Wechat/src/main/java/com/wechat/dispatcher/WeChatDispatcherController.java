@@ -54,8 +54,25 @@ public class WeChatDispatcherController extends BaseController{
 	       }
 	       /*
 	        * 微信接口的入口
+	        * 微信服务器在五秒内收不到响应会断掉连接，并且重新发起请求，总共重试三次，如果在调试中，发现用户无法收到响应的消息，可以检查是否消息处理超时。
+
+                                 关于重试的消息排重，有msgid的消息推荐使用msgid排重。事件类型消息推荐使用FromUserName + CreateTime 排重。
+
+                                  假如服务器无法保证在五秒内处理并回复，必须直接回复空串（是指回复一个空字符串，而不是一个XML结构体中content字段的内容为空，请切勿误解），微信服务器不会对此作任何处理，并且不会发起重试。
+                                  。这种情况下，可以使用客服消息接口进行异步回复。
+
+                             请开发者注意，一旦遇到以下情况，微信都会在公众号会话中，向用户下发系统提示“该公众号暂时无法提供服务，请稍后再试”：
+               1、开发者在5秒内未回复任何内容
+              2、开发者回复了异常数据，比如JSON数据等
+
+	        * 
 	        */
 	       private void doPost(HttpServletRequest request,HttpServletResponse response){
+	                   /* try {
+                            Thread.sleep(10000);
+                        } catch (InterruptedException e1) {
+                           // logger.error("", e);
+                        }*/
 	           try {
 	             MsgContext msgContext = WXMessageFactory.getMessageContext(request.getInputStream());
 	             weChatMessageManager.execute(msgContext);
