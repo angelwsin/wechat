@@ -16,6 +16,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 
+import redis.clients.jedis.Jedis;
+
 import com.wechat.util.JSONUtil;
 
 public class TokenServiceManager {
@@ -24,6 +26,7 @@ public class TokenServiceManager {
 	             private static final String TOKEN_ACCESS_URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential";
 	             private static final String     JSAPI_TICKET   ="https://api.weixin.qq.com/cgi-bin/ticket/getticket";
 	             private static final ConcurrentMap<String,Object>  tokenMap = new ConcurrentHashMap<String,Object>();
+	             private static Jedis jedis = new Jedis();
 	
 	       public static   String getAcessToken(){
 		          HttpClient  client =  HttpClients.createDefault();
@@ -129,11 +132,28 @@ public class TokenServiceManager {
 		    	    tokenMap.put("expires_in", (System.currentTimeMillis()+expires_in*1000));
 	    	    }
 	     }
+	     
+	     public static String acessJsapiTicketCache(){
+	         
+             if(jedis.get("ticket")==null){
+                 ticketCacheX();
+             }
+             return   jedis.get("ticket");
+        }
+	     
+	     @SuppressWarnings("unchecked")
+        private static  void ticketCacheX(){
+             Map<String,Object> map =   JSONUtil.getJsonT(getJsapiTicket(), Map.class);
+                String token =(String) map.get("ticket");
+                if(token!=null){
+                    jedis.setex("ticket", 2*60*60, token);
+                }
+         }
 	  public static void main(String[] args) {
 		  // System.out.println(acessToken());
 		  // System.out.println(acessToken());
-		  System.out.println(acessJsapiTicket());
-		  System.out.println(acessJsapiTicket());
+		  System.out.println(acessJsapiTicketCache());
+		  System.out.println(acessJsapiTicketCache());
 	}   
 
 }
