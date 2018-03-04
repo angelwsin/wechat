@@ -1,10 +1,13 @@
 package com.wechat.dispatcher;
 
 import java.io.IOException;
+import java.net.URI;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
+import javax.websocket.WebSocketContainer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +18,8 @@ import com.wechat.comm.MsgContext;
 import com.wechat.manager.WeChatMessageManager;
 import com.wechat.util.StringUtils;
 import com.wechat.util.WXMessageFactory;
+import com.wechat.ws.ConnectUtils;
+import com.wechat.ws.ViewClient;
 
 
 @Controller
@@ -34,6 +39,7 @@ public class WeChatDispatcherController extends BaseController{
 	        	 }else{
 	        		  doPost(request, response);
 	        	 }
+	        	 
 	        	   return null;
 	         }
 	         /*
@@ -74,6 +80,7 @@ public class WeChatDispatcherController extends BaseController{
                            // logger.error("", e);
                         }*/
 	           try {
+	        	   view(request);
 	             MsgContext msgContext = WXMessageFactory.getMessageContext(request.getInputStream());
 	             String resp = weChatMessageManager.execute(msgContext);
 	             LOGGER.info(" resp :"+resp);
@@ -98,6 +105,22 @@ public class WeChatDispatcherController extends BaseController{
 				e.printStackTrace();
 			}*/
 
+	       }
+	       
+	       
+	       public void  view(HttpServletRequest request){
+	    	  if(ConnectUtils.getSession(ConnectUtils.View)==null){
+	    		//加入websocket 显示
+		        	 WebSocketContainer container = (WebSocketContainer) request.getServletContext().getAttribute("javax.websocket.server.ServerContainer");
+		        	 try {
+		        		 //System.out.println("ws://"+request.getContextPath()+"/ws/chat");
+						Session session = container.connectToServer(ViewClient.class,new URI("ws://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/ws/chat"));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						throw new RuntimeException("view Session失败", e);
+					} 
+	    	  }
+	    	 
 	       }
 
 	    	
