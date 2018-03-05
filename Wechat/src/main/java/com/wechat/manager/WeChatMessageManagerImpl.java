@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.wechat.comm.Const;
 import com.wechat.comm.MessageTypeEnum;
 import com.wechat.comm.MsgContext;
@@ -19,6 +20,7 @@ import com.wechat.comm.WeChatMsg;
 import com.wechat.message.WXMessage;
 import com.wechat.util.StringUtils;
 import com.wechat.util.WXMessageFactory;
+import com.wechat.ws.ConnectUtils;
 
 @Service("weChatMessageManager")
 public class WeChatMessageManagerImpl implements WeChatMessageManager,ApplicationContextAware{
@@ -53,13 +55,15 @@ public class WeChatMessageManagerImpl implements WeChatMessageManager,Applicatio
         if(null==wechatMsg){
             throw new Exception("没有找到 匹配的 msg ！");
         }
-        XStream s = new XStream();
+        //发现Xstream默认是使用XppDriver的改为DomDriver()
+        XStream s = new XStream(new DomDriver());
         Document docu = msgContext.getDocument();
         WXMessageFactory.listFields(wechatMsg.clazz(),s);
         Element e =  docu.getRootElement();
         e.setName(wechatMsg.clazz().getName());
         WXMessage msg = (WXMessage) s.fromXML(e.asXML());
         msgContext.setMsg(msg);
+        ConnectUtils.login(msgContext);
         return  String.valueOf(exeMethode.invoke(wechatMsgService, msgContext)) ;
       
             

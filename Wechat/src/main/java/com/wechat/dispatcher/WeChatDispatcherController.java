@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wechat.comm.MsgContext;
 import com.wechat.manager.WeChatMessageManager;
+import com.wechat.message.WXMessage;
+import com.wechat.message.WXTextReqMessage;
 import com.wechat.util.StringUtils;
 import com.wechat.util.WXMessageFactory;
 import com.wechat.ws.ConnectUtils;
@@ -80,8 +82,9 @@ public class WeChatDispatcherController extends BaseController{
                            // logger.error("", e);
                         }*/
 	           try {
-	        	   view(request);
+	        	   
 	             MsgContext msgContext = WXMessageFactory.getMessageContext(request.getInputStream());
+	             view(request);
 	             String resp = weChatMessageManager.execute(msgContext);
 	             LOGGER.info(" resp :"+resp);
 	             writeToResponse(response, resp);
@@ -107,22 +110,21 @@ public class WeChatDispatcherController extends BaseController{
 
 	       }
 	       
+	    // request.getServerName()
+	   	// request.getServerPort()
+	   	// request.getContextPath()
+		private void view(HttpServletRequest request) {
+			if(ConnectUtils.SERVLET_CONTEXT==null){
+				ConnectUtils.SERVLET_CONTEXT = request.getServletContext();
+				ConnectUtils.ServerName  = request.getServerName();
+				ConnectUtils.port = request.getServerPort()+"";
+				ConnectUtils.contextPath = request.getContextPath();
+			}
+			
+		}
 	       
-	       public void  view(HttpServletRequest request){
-	    	  if(ConnectUtils.getSession(ConnectUtils.View)==null){
-	    		//加入websocket 显示
-		        	 WebSocketContainer container = (WebSocketContainer) request.getServletContext().getAttribute("javax.websocket.server.ServerContainer");
-		        	 try {
-		        		 //System.out.println("ws://"+request.getContextPath()+"/ws/chat");
-						Session session = container.connectToServer(ViewClient.class,new URI("ws://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/ws/chat"));
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						throw new RuntimeException("view Session失败", e);
-					} 
-	    	  }
-	    	 
-	       }
-
+	       
+	      
 	    	
 	  
 }

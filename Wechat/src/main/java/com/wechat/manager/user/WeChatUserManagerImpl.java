@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import com.wechat.DefaultHttpGet;
 import com.wechat.DefaultHttpPost;
@@ -19,6 +20,7 @@ import com.wechat.user.WXUserInfo;
 import com.wechat.user.WXUserInfos;
 import com.wechat.util.JSONUtil;
 
+@Service("weChatUserManager")
 public class WeChatUserManagerImpl implements WeChatUserManager{
 
     private static final Logger LOGGER = LogManager.getLogger(WeChatUserGroupManagerImpl.class);
