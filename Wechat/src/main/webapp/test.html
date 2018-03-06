@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="js/vue.min.js"></script>
-<script type="text/javascript" src="js/canvasBarrage.js"></script>
+<script type="text/javascript" src="js/p.js"></script>
  <script src="http://cdn.bootcss.com/sockjs-client/1.0.3/sockjs.min.js"></script>
 <title>Insert title here</title>
  <style type="text/css">  
@@ -79,7 +79,8 @@
 
 
 
-
+var myFather=new person("Bill","Gates",56,"blue");
+myFather.changeName("Ballmer");
 
 var ws = null;  
 var url =null;  
@@ -107,6 +108,7 @@ function connect() {
     };  
     ws.onmessage = function (event) {  
         log('Received: ' + event.data);  
+        myFather.changeName("Ballmer");
     };  
     ws.onclose = function (event) {  
         setConnected(false);  

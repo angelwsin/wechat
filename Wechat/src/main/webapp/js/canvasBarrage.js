@@ -203,6 +203,8 @@ var CanvasBarrage = function (canvas, video, options) {
 		store[Object.keys(store).length] = new Barrage(obj);
 	};
 	
+	
+	
 	// 重置
 	this.reset = function () {
 		time = video.currentTime;
@@ -227,3 +229,4 @@ var CanvasBarrage = function (canvas, video, options) {
 		}
 	};
 };
+
