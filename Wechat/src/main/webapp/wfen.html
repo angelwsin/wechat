@@ -8,40 +8,11 @@
 <script src="http://cdn.bootcss.com/sockjs-client/1.0.3/sockjs.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
-#connect-container {
-	float: left;
-	width: 400px
-}
 
-#connect-container div {
-	padding: 5px;
-}
-
-#console-container {
-	float: left;
-	margin-left: 15px;
-	width: 400px;
-}
-
-#console {
-	border: 1px solid #CCCCCC;
-	border-right-color: #999999;
-	border-bottom-color: #999999;
-	height: 170px;
-	overflow-y: scroll;
-	padding: 5px;
-	width: 100%;
-}
-
-#console p {
-	padding: 0;
-	margin: 0;
-}
 
 .video-x {
-	position: relative;
-	width: 640px;
-	margin: auto;
+	margin-left: 500px;
+
 }
 
 .video-x video {
@@ -82,73 +53,44 @@ input[type="submit"] {
 	margin-top: 1.5em;
 	padding-top: 2em;
 }
+.form {
+	margin-left: 500px;
+	padding-top:350px;
+}
 </style>
 <body>
 
 	<div>
-		<div id="connect-container">
-			<input id="radio1" type="radio" name="group1"
-				onclick="updateUrl('/Wechat/ws/chat/system/system');"> <label
-				for="radio1">W3C WebSocket</label> <br>
-			<div id="sockJsTransportSelect" style="visibility: hidden;">
-				<span>SockJS transport:</span> <select
-					onchange="updateTransport(this.value)">
-					<option value="all">all</option>
-					<option value="websocket">websocket</option>
-					<option value="xhr-polling">xhr-polling</option>
-					<option value="jsonp-polling">jsonp-polling</option>
-					<option value="xhr-streaming">xhr-streaming</option>
-					<option value="iframe-eventsource">iframe-eventsource</option>
-					<option value="iframe-htmlfile">iframe-htmlfile</option>
-				</select>
-			</div>
-			<div>
-				<button id="connect" onclick="connect();">Connect</button>
-				<button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
-			</div>
-			<div>
-				<textarea id="message" style="width: 350px">Here is a message!</textarea>
-			</div>
-			<div>
-				<button id="echo" onclick="echo();" disabled="disabled">Echo
-					message</button>
-			</div>
-		</div>
-		<div id="console-container">
-			<div id="console"></div>
-		</div>
-
-	</div>
-
+		
+		
 	<div class="video-x">
 		<canvas id="canvasBarrage" class="canvas-barrage"></canvas>
-		<video id="videoBarrage" width="640" height="384"
-			src="http://www.zhangxinxu.com/study/201709/video.mp4" controls  autoplay="autoplay" loop="loop"></video>
-		<form id="barrageForm" action="barrage.php" method="post"
-			autocomplete="off">
-			<p>
-				透明度(0-100)：<input type="range" class="range" name="opacity"
-					value="100" min="0" max="100"> 文字大小(16-32)：<input
-					type="range" class="range" name="fontSize" value="24" min="16"
-					max="32">
+		<video id="videoBarrage"  src="video/video.mp4" controls  autoplay="autoplay" loop="loop" class="canvas-barrage"></video>
+	</div>
+    <div class="form">
+    <form id="barrageForm" action="barrage.php" method="post" autocomplete="off" >
+			<p>透明度(0-100)：<input type="range"  name="opacity" value="100" min="0" max="100">
+			        文字大小(16-32)：<input type="range"  name="fontSize" value="24" min="16" max="32" >
 			</p>
-			<p>
-				弹幕位置：<input type="radio" id="rangeFull" name="range" checked
-					value="0,1"><label class="ui-radio" for="rangeFull"></label><label
-					for="rangeFull">全部位置</label> <input type="radio" id="rangeTop"
-					name="range" value="0,0.3"><label class="ui-radio"
-					for="rangeTop"></label><label for="rangeTop">顶部</label> <input
-					type="radio" id="rangeBottom" name="range" value="0.7,1"><label
-					class="ui-radio" for="rangeBottom"></label><label for="rangeBottom">底部</label>
+			<p>弹幕位置：<input type="radio" id="rangeFull" name="range" checked value="0,1">
+			         <label class="ui-radio" for="rangeFull"></label>
+			         <label for="rangeFull">全部位置</label>
+			          <input type="radio" id="rangeTop" name="range" value="0,0.3">
+			          <label class="ui-radio" for="rangeTop"></label>
+			          <label for="rangeTop">顶部</label>
+			          <input type="radio" id="rangeBottom" name="range" value="0.7,1">
+			          <label class="ui-radio" for="rangeBottom"></label>
+			          <label for="rangeBottom">底部</label>
 			</p>
 			<p class="last">
-				<input class="ui-input" id="input" name="value" required><input
-					type="submit" class="ui-button ui-button-primary" value="发送弹幕"
-					disabled> 颜色：<input type="color" id="color" name="color"
-					value="#ff0000">
+				<input class="ui-input" id="input" name="value" required>
+				<input type="submit" class="ui-button ui-button-primary" value="发送弹幕" disabled> 
+				颜色：<input type="color" id="color" name="color" value="#ff0000">
 			</p>
 		</form>
+    </div>
 	</div>
+
 
 </body>
 
@@ -157,10 +99,13 @@ input[type="submit"] {
 	// 弹幕数据
 	// 弹幕数据
 var dataBarrage = [{
+	value: '我们结婚了',
+	time:1
+}/*{
 	value: 'speed设为0为非滚动',
 	time: 1, // 单位秒
 	speed: 0
-}/* , {
+} , {
 	value: 'time控制弹幕时间，单位秒',
 	color: 'blue',
 	time: 2
@@ -250,7 +195,7 @@ var dataBarrage = [{
 	}, false);
 </script>
 <script
-	src="https://qidian.gtimg.com/c/=/lulu/theme/peak/js/plugin/jquery.js,/lulu/theme/peak/js/common/ui/Follow.js,/lulu/theme/peak/js/common/ui/Tips.js,/lulu/theme/peak/js/common/ui/Range.js,/lulu/theme/peak/js/common/ui/Drop.js,/lulu/theme/peak/js/common/ui/Color.js"></script>
+src="https://qidian.gtimg.com/c/=/lulu/theme/peak/js/plugin/jquery.js,/lulu/theme/peak/js/common/ui/Follow.js,/lulu/theme/peak/js/common/ui/Tips.js,/lulu/theme/peak/js/common/ui/Range.js,/lulu/theme/peak/js/common/ui/Drop.js,/lulu/theme/peak/js/common/ui/Color.js"></script>
 <script>
 	$('.range').range();
 	$('#color').color();
@@ -264,24 +209,23 @@ var dataBarrage = [{
 		document.getElementById('disconnect').disabled = !connected;
 		document.getElementById('echo').disabled = !connected;
 	}
+	
+	document.addEventListener("DOMContentLoaded", function() {
+		updateUrl('/Wechat/ws/chat/system/system');
+		connect();
+		
+	}, false);
 
 	function connect() {
-		//alert("url:"+url);  
-		if (!url) {
-			alert('Select whether to use W3C WebSocket or SockJS');
-			return;
-		}
 
 		ws = (url.indexOf('sockjs') != -1) ? new SockJS(url, undefined, {
 			protocols_whitelist : transports
 		}) : new WebSocket(url);
 
 		ws.onopen = function() {
-			setConnected(true);
-			log('Info: connection opened.');
+			console.log('open');
 		};
 		ws.onmessage = function(event) {
-			log('Received: ' + event.data);
 			demoBarrage.add({
 				value :event.data,
 				time : 1
@@ -290,9 +234,7 @@ var dataBarrage = [{
 
 		};
 		ws.onclose = function(event) {
-			setConnected(false);
-			log('Info: connection closed.');
-			log(event);
+			//setConnected(false);
 		};
 	}
 
@@ -301,7 +243,7 @@ var dataBarrage = [{
 			ws.close();
 			ws = null;
 		}
-		setConnected(false);
+		//setConnected(false);
 	}
 
 	function echo() {
@@ -315,17 +257,10 @@ var dataBarrage = [{
 	}
 
 	function updateUrl(urlPath) {
-		if (urlPath.indexOf('sockjs') != -1) {
-			url = urlPath;
-			document.getElementById('sockJsTransportSelect').style.visibility = 'visible';
+		if (window.location.protocol == 'http:') {
+			url = 'ws://' + window.location.host + urlPath;
 		} else {
-
-			if (window.location.protocol == 'http:') {
-				url = 'ws://' + window.location.host + urlPath;
-			} else {
-				url = 'wss://' + window.location.host + urlPath;
-			}
-			document.getElementById('sockJsTransportSelect').style.visibility = 'hidden';
+			url = 'wss://' + window.location.host + urlPath;
 		}
 	}
 
