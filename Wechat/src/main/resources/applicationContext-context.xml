@@ -18,5 +18,7 @@
 
    <alias name="wechatVideoService" alias="wechatShortvideoService"/>
   
-   
+   <bean id="wechatEmotionProp" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+     <property name="locations" value="classpath:wechat_emotion.properties"/>
+   </bean>
 </beans>

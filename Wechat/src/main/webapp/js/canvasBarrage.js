@@ -91,7 +91,7 @@ var CanvasBarrage = function (canvas, video, options) {
 			span.style.position = 'absolute';
 			span.style.whiteSpace = 'nowrap';
 			span.style.font = 'bold ' + fontSize + 'px "microsoft yahei", sans-serif';
-			span.innerText = obj.value;
+			//span.innerHtml = obj.value;
 			span.textContent = obj.value;
 			document.body.appendChild(span);
 			// 求得文字内容宽度
@@ -119,18 +119,26 @@ var CanvasBarrage = function (canvas, video, options) {
 			this.fontSize = fontSize;	
 		};
 		
-		this.draw = function () {			
-			// 根据此时x位置绘制文本
-			context.shadowColor = 'rgba(0,0,0,'+ this.opacity +')';
-			context.shadowBlur = 2;
-			context.font = this.fontSize + 'px "microsoft yahei", sans-serif';
-			if (/rgb\(/.test(this.color)) {
-				context.fillStyle = 'rgba('+ this.color.split('(')[1].split(')')[0] +','+ this.opacity +')';
-			} else {
-				context.fillStyle = this.color;	
-			}
-			// 填色
-			context.fillText(this.value, this.x, this.y);
+		this.draw = function () {	
+			var vales = this.value.split(":");
+			if('img'===vales[0]){
+		    	var img = new Image();
+		    	img.src = vales[1];
+		    	context.drawImage(img, this.x, this.y); 
+			}else{
+		    	// 根据此时x位置绘制文本
+				context.shadowColor = 'rgba(0,0,0,'+ this.opacity +')';
+				context.shadowBlur = 2;
+				context.font = this.fontSize + 'px "microsoft yahei", sans-serif';
+				if (/rgb\(/.test(this.color)) {
+					context.fillStyle = 'rgba('+ this.color.split('(')[1].split(')')[0] +','+ this.opacity +')';
+				} else {
+					context.fillStyle = this.color;	
+				}
+				// 填色
+				context.fillText(this.value, this.x, this.y);
+		    }
+			
 		};
 	};
 
